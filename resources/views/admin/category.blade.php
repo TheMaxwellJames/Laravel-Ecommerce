@@ -31,6 +31,15 @@
     margin-top: -20px; /* Adjust this value based on your specific layout */
     }
 
+    .center
+    {
+        margin: auto;
+        width: 50%;
+        text-align: center;
+        margin-top: 30px;
+        border: 3px solid white;
+    }
+
 
 
 </style>
@@ -103,12 +112,25 @@
                 </form>
 
 
-
-
-
-
-
             </div>
+
+
+
+            <table class="center">
+                <tr>
+                    <th>Category Name</th>
+                    <th>Action</th>
+                </tr>
+
+@foreach($data as $data)
+                <tr>
+                    <td>{{$data->category_name}}</td>
+                    <td><a href="{{route('delete_category',$data->id)}}" class="btn btn-danger" onclick="return confirm('Sure to delete?')">Delete</a></td>
+                </tr>
+
+@endforeach
+
+            </table>
 
 
 
