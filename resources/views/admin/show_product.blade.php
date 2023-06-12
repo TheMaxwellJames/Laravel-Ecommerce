@@ -41,6 +41,13 @@
  
 }
 
+
+.close-right 
+    {
+    float: right;
+    margin-top: -20px; 
+    }
+
   </style>
   </head>
   <body>
@@ -82,6 +89,14 @@
           <div class="content-wrapper">
 
 
+          @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+        <button type="button" class="close close-right" data-dismiss="alert" aria-hidden="true">&times;</button>
+    </div>
+@endif
+
+
             <h2 class="font_size">All Product</h2>
 
 <table class="center">
@@ -93,6 +108,9 @@
         <th  class="th_deg">Price</th>
        <th  class="th_deg">Discount Price</th>
        <th  class="th_deg">Product Image</th>
+      
+       <th  class="th_deg">Delete</th>
+       <th  class="th_deg">Edit</th>
 
     </tr>
 
@@ -107,6 +125,9 @@
         <td>
             <img class="img_size" src="/product/{{$product->image}}" alt="">
         </td>
+        <td><a href="{{url('delete_product',$product->id)}}" onclick="return confirm('Sure to delete?')" class="btn btn-danger"> Delete</a>  </td>
+        
+        <td><a href="{{url('update_product',$product->id)}}" class="btn btn-success">Edit</a></td>
 
     </tr>
     @endforeach
