@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 
+use App\Models\Product;
+
 class HomeController extends Controller
 {
 
@@ -14,8 +16,10 @@ class HomeController extends Controller
 
 public function index()
 {
+
+    $product=Product::paginate(10);
    
-     return view('home.userpage');
+     return view('home.userpage', compact('product'));
       
   
 }
@@ -37,8 +41,10 @@ public function index()
 
         else
         {
+
+            $product=Product::paginate(10);
             
-            return view('home.userpage');
+            return view('home.userpage', compact('product'));
         }
     }
 }
