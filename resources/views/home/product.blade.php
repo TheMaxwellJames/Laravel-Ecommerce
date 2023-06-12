@@ -15,8 +15,9 @@
                   <div class="box">
                      <div class="option_container">
                         <div class="options">
-                           <a href="" class="option1">
-                           {{$products->category}}
+                           <a href="{{url('product_details',$products->id)}}" class="option1">
+                           <!-- {{$products->category}} -->
+                           Product Details
                            </a>
                            <a href="" class="option2">
                            Buy Now
