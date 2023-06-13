@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
    <head>
+
+
+  
       <!-- Basic -->
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -70,13 +73,13 @@
 
 
      
-      <div class="cpy_">
-         <p class="mx-auto">© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>
+       <div class="cpy_">
+         <p class="mx-auto">© 2021 All Rights Reserved By <a href="">Faam Stores</a><br>
          
-            Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+            <!-- Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a> -->
          
          </p>
-      </div>
+      </div> 
       <!-- jQery -->
       <script src="home/js/jquery-3.4.1.min.js"></script>
       <!-- popper js -->

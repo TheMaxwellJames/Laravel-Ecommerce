@@ -1,4 +1,6 @@
  <!-- product section -->
+
+
  <section class="product_section layout_padding">
          <div class="container">
             <div class="heading_container heading_center">
@@ -16,12 +18,31 @@
                      <div class="option_container">
                         <div class="options">
                            <a href="{{url('product_details',$products->id)}}" class="option1">
-                           <!-- {{$products->category}} -->
+                        
                            Product Details
                            </a>
-                           <a href="" class="option2">
-                           Buy Now
-                           </a>
+                         
+                           <form action="{{url('add_cart', $products->id)}}" method="POST">
+                              @csrf
+
+                           <div class="row">
+                              
+
+                           <div class="col-md-4" style="margin-right: 10px;">
+                           <input type="number" name="quantity" value="1" min="1" style="width: 100px">
+                           </div>
+
+                           <div class="colo-md-4">
+                           <input type="submit" value="Add To Cart" >
+                           </div>
+                       
+
+                              
+                           </div>
+
+                         
+
+                           </form>
                         </div>
                      </div>
                      <div class="img-box">
