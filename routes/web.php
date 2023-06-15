@@ -55,11 +55,13 @@ Route::get('/delete_category/{id}', [AdminController::class, 'delete_category'])
 
  Route::get('/order', [AdminController::class, 'order']);
 
+ Route::get('/delivered/{id}', [AdminController::class, 'delivered']);
 
 
 
 
- 
+
+
 
 
  Route::get('/product_details/{id}', [HomeController::class, 'product_details']);

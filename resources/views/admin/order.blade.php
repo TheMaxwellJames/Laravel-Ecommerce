@@ -98,6 +98,7 @@
                     <th>Payment Status</th>
                     <th>Delivery Status</th>
                     <th>Image</th>
+                    <th>Delivered</th>
                    
                 </tr>
 
@@ -113,7 +114,21 @@
                     <td>{{$order->price}}</td>
                     <td>{{$order->payment_status}}</td>
                     <td>{{$order->delivery_status}}</td>
-                    <td><img class="img_size" src="/product/{{$order->image}}" alt=""></td>
+                    <td>
+                        <img class="img_size" src="/product/{{$order->image}}" alt="">
+                </td>
+                    <td>
+
+                @if($order->delivery_status=='processing')
+
+                        <a href="{{url('delivered',$order->id)}}" onclick="return confirm('Has the product been delivered?')" class="btn btn-primary">Delivered</a>
+
+                        @else
+                        <p style="color:green">Delivered</p>
+
+                    @endif
+
+                    </td>
                 </tr>
              @endforeach   
             </table>
