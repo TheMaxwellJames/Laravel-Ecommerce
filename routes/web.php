@@ -53,6 +53,14 @@ Route::get('/delete_category/{id}', [AdminController::class, 'delete_category'])
 
  Route::post('/update_product_confirm/{id}', [AdminController::class, 'update_product_confirm']);
 
+ Route::get('/order', [AdminController::class, 'order']);
+
+
+
+
+
+ 
+
 
  Route::get('/product_details/{id}', [HomeController::class, 'product_details']);
 
@@ -71,3 +79,5 @@ Route::get('/delete_category/{id}', [AdminController::class, 'delete_category'])
 
 
  Route::post('stripe/{totalprice}', [HomeController::class, 'stripePost'])->name('stripe.post');
+
+
