@@ -99,6 +99,7 @@
                     <th>Delivery Status</th>
                     <th>Image</th>
                     <th>Delivered</th>
+                    <th>Print PDF</th>
                    
                 </tr>
 
@@ -128,6 +129,10 @@
 
                     @endif
 
+                    </td>
+
+                    <td>
+                        <a href="{{url('print_pdf',$order->id)}}" class="btn btn-secondary">Print</a>
                     </td>
                 </tr>
              @endforeach   
