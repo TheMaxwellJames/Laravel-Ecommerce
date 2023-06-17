@@ -86,6 +86,15 @@
             <h1 class="title_deg">All Orders</h1>
 
 
+            <div>
+              <form action="">
+
+                
+
+              </form>
+            </div>
+
+
             <table class="table_deg">
                 <tr class="th_deg">
                     <th>Name</th>
@@ -100,6 +109,7 @@
                     <th>Image</th>
                     <th>Delivered</th>
                     <th>Print PDF</th>
+                    <th>Send Email</th>
                    
                 </tr>
 
@@ -134,6 +144,12 @@
                     <td>
                         <a href="{{url('print_pdf',$order->id)}}" class="btn btn-secondary">Print</a>
                     </td>
+
+
+                    <td>
+                        <a href="{{url('send_email',$order->id)}}" class="btn btn-info">Send</a>
+                    </td>
+
                 </tr>
              @endforeach   
             </table>

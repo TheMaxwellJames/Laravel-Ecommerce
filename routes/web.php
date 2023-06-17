@@ -60,6 +60,12 @@ Route::get('/delete_category/{id}', [AdminController::class, 'delete_category'])
  Route::get('/print_pdf/{id}', [AdminController::class, 'print_pdf']);
 
 
+ Route::get('/send_email/{id}', [AdminController::class, 'send_email']);
+
+
+ Route::post('/send_user_email/{id}', [AdminController::class, 'send_user_email']);
+
+
 
 
 
