@@ -66,6 +66,9 @@ Route::get('/delete_category/{id}', [AdminController::class, 'delete_category'])
  Route::post('/send_user_email/{id}', [AdminController::class, 'send_user_email']);
 
 
+ Route::get('/search', [AdminController::class, 'searchdata']);
+
+
 
 
 
