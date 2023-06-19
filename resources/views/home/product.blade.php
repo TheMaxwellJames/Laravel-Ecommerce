@@ -5,8 +5,29 @@
          <div class="container">
             <div class="heading_container heading_center">
                <h2>
-                  Our <span>products</span>
+                  Our <span>Products</span>
                </h2>
+
+               <br><br>
+
+
+               <div>
+
+
+               <form action="{{url('product_search')}}" method="GET">
+                  @csrf
+
+               <input style="width:500px;" type="text" name="search" placeholder="Search here">
+
+               <input type="submit" value="Search">
+
+
+               </form>
+
+               </div>
+
+
+
             </div>
             <div class="row">
 

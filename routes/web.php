@@ -100,3 +100,6 @@ Route::get('/delete_category/{id}', [AdminController::class, 'delete_category'])
  Route::get('/cancel_order/{id}', [HomeController::class, 'cancel_order']);
 
 
+ Route::get('/product_search', [HomeController::class, 'product_search']);
+
+
