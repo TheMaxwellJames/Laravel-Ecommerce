@@ -13,6 +13,10 @@ use App\Models\Cart;
 
 use App\Models\Order;
 
+use App\Models\Comment;
+
+use App\Models\Reply;
+
 use Session;
 use Stripe;
 
@@ -25,8 +29,15 @@ public function index()
 {
 
     $product=Product::paginate(10);
+
+
+    $comment=comment::orderby('id', 'desc')->get();
+
+
+
+    $reply=reply::all();
    
-     return view('home.userpage', compact('product'));
+     return view('home.userpage', compact('product', 'comment', 'reply'));
       
   
 }
@@ -76,8 +87,12 @@ public function index()
         {
 
             $product=Product::paginate(10);
+
+            $comment=comment::orderby('id', 'desc')->get();
+
+            $reply=reply::all();
             
-            return view('home.userpage', compact('product'));
+            return view('home.userpage', compact('product', 'comment', 'reply'));
         }
     }
 
@@ -389,17 +404,97 @@ public function cancel_order($id)
 public function product_search(Request $request)
 {
 
-        // $comment=comment::orderby('id', 'desc')->get();
+        $comment=comment::orderby('id', 'desc')->get();
 
-        // $reply=reply::all();
+        $reply=reply::all();
 
     $search_text=$request->search;
 
     $product=product::where('title', 'LIKE', "%$search_text%")->orWhere('category', 'LIKE', "$search_text")->paginate(10);
 
 
-    return view('home.userpage', compact('product'));
+    return view('home.userpage', compact('product', 'comment', 'reply'));
 }
+
+
+
+
+
+
+
+
+public function add_comment(Request $request)
+{
+
+
+if(Auth::id())
+{
+    $comment=new comment;
+
+    $comment->name=Auth::user()->name;
+
+    $comment->user_id=Auth::user()->id;
+
+
+    $comment->comment=$request->comment;
+
+
+    $comment->save();
+
+
+    return redirect()->back();
+
+    
+
+
+
+}
+else
+{
+    return redirect('login');
+}
+
+
+}
+
+
+
+public function add_reply(Request $request)
+{
+    if(Auth::id())
+    {
+
+        $reply=new reply;
+
+        $reply->name=Auth::user()->name;
+
+        $reply->user_id=Auth::user()->id;
+
+
+        $reply->comment_id=$request->commentId;
+
+
+        $reply->reply=$request->reply;
+
+
+        $reply->save();
+
+        return redirect()->back();
+
+
+
+
+
+    }
+
+    else
+    {
+        return redirect('login'); 
+    }
+}
+
+
+
 
 
 }

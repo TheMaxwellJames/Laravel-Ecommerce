@@ -103,3 +103,10 @@ Route::get('/delete_category/{id}', [AdminController::class, 'delete_category'])
  Route::get('/product_search', [HomeController::class, 'product_search']);
 
 
+ Route::post('/add_comment', [HomeController::class, 'add_comment']);
+
+
+ 
+ Route::post('/add_reply', [HomeController::class, 'add_reply']);
+
+
