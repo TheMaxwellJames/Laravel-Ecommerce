@@ -29,6 +29,19 @@
 
 
             </div>
+
+
+            @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+        <button type="button" class="close close-right" data-dismiss="alert" aria-hidden="true">&times;</button>
+    </div>
+@endif
+
+
+
+
+
             <div class="row">
 
 

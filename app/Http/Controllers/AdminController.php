@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
@@ -20,22 +22,44 @@ class AdminController extends Controller
     public function  view_category()
     {
 
-        $data=category::all();
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
+            $data=category::all();
 
-        return view('admin.category', compact('data'));
+            return view('admin.category', compact('data'));
+        }
+        else 
+        {
+            return redirect('login');
+        }
+
+       
     }
 
 
     public function  add_category(Request $request)
     {
-        $data=new Category;
+        
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
+            $data=new Category;
 
-        $data->category_name= $request->category;
+            $data->category_name= $request->category;
+    
+            $data->save();
+    
+    
+            return redirect()->back()->with('message', 'Category Added');
+        }
 
-        $data->save();
+        else 
+        {
+            return redirect('login');
+        }
 
 
-        return redirect()->back()->with('message', 'Category Added');
+
+      
 
 
 
@@ -45,18 +69,29 @@ class AdminController extends Controller
     public function delete_category($id)
     {
 
+        if(Auth::id()  && (Auth::User()->usertype == 1))
+        {
+            $data=category::find($id);
 
-        $data=category::find($id);
+            $data->delete();
+    
+            return redirect()->back()->with('message', 'Category Deleted');
+        }
 
-        $data->delete();
+        else
+        {
+            return redirect('login'); 
+        }
 
-        return redirect()->back()->with('message', 'Category Deleted');
+
+        
 
     }
 
 
     public function view_product()
     {
+        if(Auth::id() && (Auth::User()->usertype == 1))
 
         $category=category::all();
         return view('admin.product', compact('category'));
@@ -121,7 +156,8 @@ class AdminController extends Controller
 
     public function update_product($id)
     {
-
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
             $product=product::find($id);
 
             
@@ -130,47 +166,68 @@ class AdminController extends Controller
 
 
             return view('admin.update_product', compact('product', 'category'));
+        }
+
+        else 
+        {
+            return redirect('login');
+        }
+
+           
     }
 
 
 
     public function update_product_confirm(Request $request, $id)
     {
-            $product=product::find($id);
 
 
-            $product->title=$request->title;
-
-            $product->description=$request->description;
-
-            $product->price=$request->price;
-
-            $product->discount_price=$request->discount_price;
-
-            $product->category=$request->category;
-
-            $product->quantity=$request->quantity;
-
-
-            $image=$request->image;
-
-
-            if($image)
+            if(Auth::id() && (Auth::User()->usertype == 1)) 
             {
-                $imagename=time().'.'.$image->getClientOriginalExtension();
+                $product=product::find($id);
 
-                $request->image->move('product',$imagename);
+
+                $product->title=$request->title;
+    
+                $product->description=$request->description;
+    
+                $product->price=$request->price;
+    
+                $product->discount_price=$request->discount_price;
+    
+                $product->category=$request->category;
+    
+                $product->quantity=$request->quantity;
     
     
-                $product->image=$imagename;
+                $image=$request->image;
     
+    
+                if($image)
+                {
+                    $imagename=time().'.'.$image->getClientOriginalExtension();
+    
+                    $request->image->move('product',$imagename);
+        
+        
+                    $product->image=$imagename;
+        
+                }
+    
+    
+              
+                $product->save();
+    
+                return redirect()->back()->with('message', 'Product Updated');
+            }
+
+            else 
+            {
+                return redirect('login');
             }
 
 
-          
-            $product->save();
-
-            return redirect()->back()->with('message', 'Product Updated');
+      
 
    
     }
@@ -180,11 +237,22 @@ class AdminController extends Controller
     public function order()
     {
 
-        $order=order::all();
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
+            $order=order::all();
 
 
 
-        return view('admin.order', compact('order'));
+            return view('admin.order', compact('order'));
+        }
+
+        else 
+        {
+            return redirect('login');
+        }
+
+
+       
     }
 
 
@@ -255,10 +323,21 @@ class AdminController extends Controller
 
     public function searchdata(Request $request)
     {
-            $searchText=$request->search;
+
+            if(Auth::id() && (Auth::User()->usertype == 1))
+            {
+                $searchText=$request->search;
 
             $order=order::where('name','LIKE',"%$searchText%")->orWhere('phone','LIKE',"%$searchText%")->orWhere('product_title','LIKE',"%$searchText%")->get();
 
             return view('admin.order',compact('order'));
+            }
+
+            else 
+            {
+                return redirect('login');
+            }
+
+            
     }
 }
