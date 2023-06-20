@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use RealRashid\SweetAlert\Facades\Alert;
+
 use App\Models\User;
 
 use App\Models\Product;
@@ -103,7 +105,7 @@ public function index()
 
             $product=product::find($id);
 
-            return view('home.product_details', compact('product'));
+            return view('home.product_details', compact('product'))->with('message', 'Product Added Succesfully');
     }
 
 
@@ -152,7 +154,11 @@ public function index()
 
                         $cart->save();
 
-                        return redirect()->back()->with('message', 'Product Added Succesfully');
+                        // Alert::success('Product Added Successfully', 'Product Added To Cart');
+
+                        // return redirect()->back();
+
+                         return redirect()->back()->with('message', 'Product Added Succesfully');
 
                     }
 
@@ -201,6 +207,10 @@ public function index()
    
    
                         $cart->save();
+
+                       // Alert::success('Product Added Successfully', 'Product Added To Cart');
+
+                        //return redirect()->back();
    
                         return redirect()->back()->with('message', 'Product Added Succesfully');
    
